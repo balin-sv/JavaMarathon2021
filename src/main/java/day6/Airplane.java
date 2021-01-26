@@ -2,7 +2,7 @@ package day6;
 
 public class Airplane {
 
-    String producer;
+    private String producer;
     private int year;
     private int length;
     private int weigh;
@@ -62,16 +62,33 @@ public class Airplane {
         return fuel;
     }
 
-    static void info(Airplane a) {
-        System.out.println("Данные о самолете " + a.getProducer() + ", Изготовитель: " + a.getProducer() +
-                ", год выпуска: " + a.getYear() + ", длина: " + a.getLength() + ", вес: " + a.getWeigh() +
-                ", количество топлива: " + a.getFuel());
+//    static void info(Airplane a) {
+//        System.out.println("Данные о самолете " + a.getProducer() + ", Изготовитель: " + a.getProducer() +
+//                ", год выпуска: " + a.getYear() + ", длина: " + a.getLength() + ", вес: " + a.getWeigh() +
+//                ", количество топлива: " + a.getFuel());
+//    }
+//
+//    static void fillUp(Airplane a, int n) {
+//        a.setFuel(a.getFuel() + n);
+//
+//    }
+
+    void info() {
+        System.out.println("Данные о самолете " + producer);
+        System.out.println("Изготовитель: " + producer);
+        System.out.println("год выпуска: " + year);
+        System.out.println("длина: " + length);
+        System.out.println("вес: " + weigh);
+        System.out.println("количество топлива: " + fuel);
+
     }
 
-    static void fillUp(Airplane a, int n) {
-        a.setFuel(a.getFuel() + n);
-
+    void fillUp(int n) {
+        fuel += n;
     }
-
 
 }
+
+
+
+
