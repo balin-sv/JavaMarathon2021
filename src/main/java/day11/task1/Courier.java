@@ -34,37 +34,29 @@ public class Courier implements Worker {
 
     @Override
     public String toString() {
-        return "заработная плата " + getSalary() + " бонус " + getIsPayed();
+        return "заработная плата " + salary + " бонус " + getIsPayed();
     }
 
     @Override
     public void doWork() {
         w1.setCountDeliveredOrders(w1.getCountDeliveredOrders() + 1);
-
+        salary = salary + 100;
         if (w1.getCountDeliveredOrders() == 10000) {
-            setSalary(getSalary() + 100);
             bonus();
-            w1.setCountDeliveredOrders(0);
-        } else {
-            setSalary(getSalary() + 100);
-
+        }
+        if (w1.getCountDeliveredOrders() < 10000) {
+            //System.out.println("Бонус пока не доступен");
+        }
+        if (w1.getCountDeliveredOrders() > 10000 && w1.getCountDeliveredOrders() < 20000) {
+            System.out.println("бонус уже был выплачен");
         }
     }
 
     @Override
     public void bonus() {
-
-        if (w1.getCountDeliveredOrders() < 10000) {
-            System.out.println("Бонус пока не доступен");
-        }
-        if (w1.getCountDeliveredOrders() == 10000) {
-            System.out.println("Бонус!!!!!");
-
-            int aux = 50000 / countCouriers;
-            setSalary(aux);
-        }
-
+        System.out.println("Бонус!!!!!");
+        int aux = 50000 / countCouriers;
+        salary = aux;
     }
 
 }
-
