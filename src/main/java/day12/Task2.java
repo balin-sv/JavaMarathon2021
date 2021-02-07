@@ -7,21 +7,13 @@ public class Task2 {
 
         ArrayList<Integer> list = new ArrayList<>();
 
-        for (int i = 0; i < 32; i++) {
-
-            list.add(i++);
-        }
-
-        Integer aux = 300;
-
-        for (int i = 32; i < 52; i++) {
-
-            if (i == 32) {
-                list.add(aux);
+        for (int i = 0; i <= 350; i++) {
+            if (i <= 30 && i > 0 && i% 2 == 0) {
+                list.add(i++);
             }
-            aux = 300 + i++;
-
-            list.add(aux);
+            if (i>= 300 && i%2 == 0) {
+                list.add(i++);
+            }
         }
 
         for (int i = 0; i < list.size(); i++) {
