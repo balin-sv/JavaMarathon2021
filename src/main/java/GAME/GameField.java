@@ -49,30 +49,39 @@ public class GameField {
 //        }
     }
 
-    public void installShips() {
+    public void installShips() throws NullPointerException, Exception {;
         Integer[] coordinates = new Integer[0];
         boolean check = false;
 
         while (listOfShipsForInstall.size() != 6) {
 
             System.out.println("координаты для 1 палубных кораблей - 2 числа");
-            String lineXY = sc.nextLine();
+            String lineXY;
+
+            lineXY = sc.nextLine();
+
             String[] auxLine = lineXY.split(",");
+
             if (auxLine.length == 2) {
                 coordinates = fieldArray(auxLine);
             } else {
                 System.out.println("ошибка ввода - требуется ввести 2 числа");
+
             }
 
-            if (coordinates.length == 2) {
+            check = coordinates != null;
+
+            if (check == true) {
                 check = checkCoordinatesForNumbers(coordinates);
             }
+
             if (check == true) {
                 check = checkCoordinatesForSequence(coordinates);
 
             } else {
-                System.out.println("ошибка ввода - число/а меньше 0 или больше 9");
-                check = false;
+                if (coordinates != null) {
+                    System.out.println("ошибка ввода - число/а меньше 0 или больше 9");
+                }
 
             }
 
@@ -87,19 +96,20 @@ public class GameField {
             String lineXY = sc.nextLine();
             String[] auxLine = lineXY.split("[,;]+");
             if (auxLine.length == 4) {
+
                 coordinates = fieldArray(auxLine);
             } else {
                 System.out.println("ошибка ввода - требуется ввести 4 числа");
             }
 
-            if (coordinates.length == 4) {
+            check = coordinates != null;
+
+            if (check == true) {
                 check = checkCoordinatesForNumbers(coordinates);
             }
 
             if (check == true) {
                 check = checkCoordinatesForSequence(coordinates);
-            } else {
-                System.out.println("ошибка ввода - число/а меньше 0 или больше 9");
             }
 
             if (check == true) {
@@ -113,12 +123,14 @@ public class GameField {
             String lineXY = sc.nextLine();
             String[] auxLine = lineXY.split("[,;]+");
             if (auxLine.length == 6) {
+
                 coordinates = fieldArray(auxLine);
             } else {
                 System.out.println("ошибка ввода - требуется ввести 6 чисел");
             }
+            check = coordinates != null;
 
-            if (coordinates.length == 6) {
+            if (check == true) {
                 check = checkCoordinatesForNumbers(coordinates);
             }
 
@@ -126,8 +138,9 @@ public class GameField {
                 check = checkCoordinatesForSequence(coordinates);
 
             } else {
-                System.out.println("ошибка ввода - число/а меньше 0 или больше 9");
-                check = false;
+                if (coordinates != null) {
+                    System.out.println("ошибка ввода - число/а меньше 0 или больше 9");
+                }
 
             }
 
@@ -142,19 +155,24 @@ public class GameField {
             String lineXY = sc.nextLine();
             String[] auxLine = lineXY.split("[,;]+");
             if (auxLine.length == 8) {
+
                 coordinates = fieldArray(auxLine);
             } else {
                 System.out.println("ошибка ввода - требуется ввести 8 чисел");
             }
 
-            if (coordinates.length == 8) {
+            check = coordinates != null;
+
+            if (check == true) {
                 check = checkCoordinatesForNumbers(coordinates);
             }
 
             if (check == true) {
                 check = checkCoordinatesForSequence(coordinates);
             } else {
-                System.out.println("ошибка ввода - число/а меньше 0 или больше 9");
+                if (coordinates != null) {
+                    System.out.println("ошибка ввода - число/а меньше 0 или больше 9");
+                }
             }
 
             if (check == true) {
@@ -190,8 +208,7 @@ public class GameField {
 
     }
 
-    //!!!!!! ПОПЫТКА СДЕЛАТЬ ОРЕОЛЫ КОРАБЛЕЙ
-
+    //
 // проверка только для 1 палубного
 //    public void installHalo(int[]coordinates) {
 //
@@ -224,9 +241,6 @@ public class GameField {
 //            }
 //        }
 //    }
-
-
-
     public void showField() {
         for (int i = 0; i < gameArray.length; i++) {
             for (int j = 0; j < gameArray.length; j++) {
@@ -237,19 +251,33 @@ public class GameField {
 
     }
 
+    public void showCoordinates() {
+        for (int i = 0; i < listOfShipsForBattle.size(); i++) {
+
+            if (i == 5) {
+                System.out.println("");
+            }
+            System.out.print("type=" + listOfShipsForBattle.get(i).getType());
+            listOfShipsForBattle.get(i).getShipCoordinate();
+
+        }
+        System.out.println("");
+    }
+
     public static int findCoordinates(int a, int b, GameField field, int switcher) {
         boolean shipCondition = false;
 
-
         if (field.gameArray[a][b].equals("[" + "  ]") || field.gameArray[a][b].equals("[**]")) {
             System.out.println("мимо! теперь ходит другой игрок");
-            if (switcher == 1) {
-                switcher = 2;
-            } else {
-                switcher = 1;
-            }
 
-            return switcher;
+            switch (switcher) {
+                case 1:
+                    switcher = 2;
+                    break;
+                case 2:
+                    switcher = 1;
+                    break;
+            }
 
         } else {
             System.out.println("корабль подбит!");
@@ -259,9 +287,7 @@ public class GameField {
 // вызываю метод в классе Ships
                     shipCondition = ship.changeOnePartOfShip(a, b);
                 }
-//                    }
-//
-//                }
+
             }
         }
 
@@ -294,3 +320,4 @@ public class GameField {
 
     }
 }
+

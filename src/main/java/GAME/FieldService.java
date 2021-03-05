@@ -12,13 +12,21 @@ public class FieldService {
 
     Scanner sc = new Scanner(System.in).useDelimiter("\n").useLocale(Locale.US);
 
-    public static Integer[] fieldArray(String[] auxLine) {
+    public static Integer[] fieldArray(String[] auxLine) throws Exception {
         Integer[] aux = new Integer[auxLine.length];
 
         for (int i = 0; i < auxLine.length; i++) {
-
-            aux[i] = Integer.parseInt(auxLine[i]);
-
+            try {
+                aux[i] = Integer.parseInt(auxLine[i]);
+            } catch (NumberFormatException e) {
+                System.out.println("ошибка ввода - требуется ввести число");
+                aux = null;
+                break;
+            } catch (NullPointerException a) {
+                System.out.println("ошибка ввода - требуется число");
+                aux = null;
+                break;
+            }
         }
 
         return aux;
@@ -30,12 +38,14 @@ public class FieldService {
         int counter = 0;
 
         for (int i = 0; i < coordinates.length; i++) {
-            if (coordinates[i] < 0 || coordinates[i] > 9) {
+
+            if (coordinates[i] >= 0 && coordinates[i] <= 9 && coordinates[i] instanceof Integer) {
                 counter++;
             }
+
         }
 
-        return counter <= 0;
+        return counter == coordinates.length;
 
     }
 
@@ -63,3 +73,5 @@ public class FieldService {
     }
 
 }
+
+

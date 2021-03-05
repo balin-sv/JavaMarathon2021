@@ -52,8 +52,9 @@ public class Ships {
     public String toString() {
         return "Ships{" + "type=" + type + '}';
     }
+
     //метод последовательно находит пару координат переданных в параметрах,
-    //меняет найденные числа в массиве на [-1][-1] /метка подбитого корабля/
+//меняет найденные числа в массиве на [-1][-1] /метка подбитого корабля/
     public boolean changeOnePartOfShip(int a, int b) {
         boolean wrecked = true;
 
